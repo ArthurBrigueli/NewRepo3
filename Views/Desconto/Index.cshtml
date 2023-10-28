@@ -1,0 +1,59 @@
+﻿@model IEnumerable<pimfo.Models.Desconto>
+
+@{
+    ViewData["Title"] = "Desconto";
+}
+
+<h1>Descontos</h1>
+
+<p>
+    <a asp-action="Create">Cadastrar desconto</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.vale_alimentacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vale_transporte)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.valor_ferias)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.imposto_renda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.valor_fgts)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.vale_alimentacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vale_transporte)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valor_ferias)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.imposto_renda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valor_fgts)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Detalhe</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Deletar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

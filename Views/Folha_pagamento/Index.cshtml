@@ -1,0 +1,98 @@
+﻿@model IEnumerable<pimfo.Models.Folha_pagamento>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Holerite</h1>
+
+<p>
+    <a asp-action="Create">Gerar</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id_func)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.nome_func)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.salario_base)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cargo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vale_alimentacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vale_transporte)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.valor_ferias)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.imposto_renda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.valor_fgts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.salario_liquido)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_func)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nome_func)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.salario_base)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cargo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vale_alimentacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vale_transporte)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valor_ferias)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.imposto_renda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valor_fgts)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.salario_liquido)
+                </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id_folha">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.id_folha">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.id_folha">Deletar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

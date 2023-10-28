@@ -1,0 +1,50 @@
+﻿@model pimfo.Models.Desconto
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Cadastrar Desconto</h1>
+
+<h4>Desconto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="vale_alimentacao" class="control-label"></label>
+                <input asp-for="vale_alimentacao" class="form-control" />
+                <span asp-validation-for="vale_alimentacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="vale_transporte" class="control-label"></label>
+                <input asp-for="vale_transporte" class="form-control" />
+                <span asp-validation-for="vale_transporte" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="valor_ferias" class="control-label"></label>
+                <input asp-for="valor_ferias" class="form-control" />
+                <span asp-validation-for="valor_ferias" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="imposto_renda" class="control-label"></label>
+                <input asp-for="imposto_renda" class="form-control" />
+                <span asp-validation-for="imposto_renda" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="valor_fgts" class="control-label"></label>
+                <input asp-for="valor_fgts" class="form-control" />
+                <span asp-validation-for="valor_fgts" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
