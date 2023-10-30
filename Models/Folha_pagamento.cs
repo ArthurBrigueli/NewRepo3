@@ -33,7 +33,7 @@ namespace pimfo.Models
         [DisplayName("Imposto de renda")]
 
         public float imposto_renda { get; set; }
-        [DisplayName("Valor fgts")]
+        [DisplayName("FGTS")]
 
         public float valor_fgts { get; set; }
     }
