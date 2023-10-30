@@ -56,7 +56,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="id" />
-        <input type="submit" value="Deletar" class="btn btn-danger" /> |
+        <input type="submit" value="Deletar" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')" /> |
         <a asp-action="Index">Voltar a lista</a>
     </form>
 </div>
