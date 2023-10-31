@@ -14,5 +14,7 @@ namespace pimfo.data
 
         public DbSet<Relatorio> Relatorio { get; set; }
 
+        public DbSet<Login> Login { get; set; }
+
     }
 }

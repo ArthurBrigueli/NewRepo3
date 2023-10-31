@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace pimfo.Models
 {
-    public class User
+    public class Login
     {
         [Key]
         [DisplayName("ID")]
