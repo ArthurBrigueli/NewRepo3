@@ -1,0 +1,83 @@
+﻿body {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+
+.Container_login{
+    display: flex;
+    justify-content: center;
+    align-content:center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    height: 50%;
+
+}
+
+
+.container_input_login{
+    display: flex;
+    flex-direction:column;
+    gap: 20px;
+    justify-content:center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border: 2px solid white;
+    padding: 50px 0px;
+    border-radius: 14px;
+
+}
+
+
+.container_usuario{
+    display: flex;
+    flex-direction: column;
+}
+
+.container_senha {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputuser {
+    width: 300px;
+    height: 30px;
+    background-color: transparent;
+    padding-left: 10px
+}
+
+.inputsenha {
+    width: 300px;
+    height: 30px;
+    background-color: transparent;
+    padding-left: 10px
+}
+
+.botao_login{
+    width: 200px;
+    height: 40px;
+    background-color: transparent;
+    color: black;
+}
+
+.botao_login:hover {
+    width: 200px;
+    height: 40px;
+    background-color: gray;
+    border: none;
+    cursor: pointer;
+    color: black;
+    
+}
+
+h1{
+    font-weight: bold;
+    font-size: 40px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

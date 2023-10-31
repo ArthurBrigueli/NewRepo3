@@ -5,28 +5,36 @@
     Layout = null;
 }
 
-<h1>Login</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NodeServices</title>
+    <link rel="stylesheet" href="~/css/Login.css" asp-append-version="true" />
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+</head>
+<body>
+    <div class="Container_login">
+        <h1 >Login</h1>
+        <form class="container_input_login" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="container_usuario">
                 <label asp-for="usuario" class="control-label"></label>
-                <input asp-for="usuario" class="form-control" />
+                <input asp-for="usuario" class="inputuser" />
                 <span asp-validation-for="usuario" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="container_senha">
                 <label asp-for="senha" class="control-label"></label>
-                <input asp-for="senha" class="form-control" />
+                <input asp-for="senha" class="inputsenha" />
                 <span asp-validation-for="senha" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Logar" class="btn btn-primary" />
+                <input type="submit" value="Logar" class="botao_login" />
             </div>
         </form>
     </div>
-</div>
+</body>
+</html>
 
 
