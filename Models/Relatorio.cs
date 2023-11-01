@@ -1,14 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace pimfo.Models
 {
     public class Relatorio
     {
         [Key]
-        public int id { get; set; }
+        [DisplayName("ID")]
+        public int id_relatorio { get; set; }
 
-        public string data { get; set; }
-
-        public float valor { get; set; }
+        [DisplayName("Data")]
+        public string data_relatorio { get; set; }
+        [DisplayName("Valor Total")]
+        public double valor_total { get; set; }
     }
 }

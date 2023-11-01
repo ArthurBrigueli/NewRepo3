@@ -13,10 +13,12 @@ namespace pimfo.Controllers
     public class Folha_pagamentoController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _contextRelatorio;
 
-        public Folha_pagamentoController(ApplicationDbContext context)
+        public Folha_pagamentoController(ApplicationDbContext context, ApplicationDbContext contextRelatorio)
         {
             _context = context;
+            _contextRelatorio = contextRelatorio;
         }
 
         // GET: Folha_pagamento
@@ -123,16 +125,18 @@ namespace pimfo.Controllers
         {
             var funcionarios = _context.Funcionarios.ToList();
             var descontos = _context.Desconto.ToList();
-
             DateTime currentTime = DateTime.Now;
+            var salGeral = 0.0;
+
 
             foreach (var funcionario in funcionarios)
             {
                 foreach(var desconto in descontos)
                 {
+
                     var descTotal = desconto.vale_alimentacao + desconto.valor_ferias + desconto.imposto_renda + desconto.vale_transporte + desconto.valor_fgts;
                     var salaatt = funcionario.salario_bruto - descTotal;
-
+                    salGeral += funcionario.salario_bruto;
                     var registroFolha = new Folha_pagamento
                     {
                         id_func = funcionario.id,//asas
@@ -152,6 +156,14 @@ namespace pimfo.Controllers
                     await _context.SaveChangesAsync();
                 }
             }
+            var relatorio = new Relatorio
+            {
+                data_relatorio = currentTime.ToString("dd/MM/yyyy HH:mm:ss"),
+                valor_total = salGeral
+            };
+
+            _contextRelatorio.Add(relatorio);
+            await _contextRelatorio.SaveChangesAsync();
             
 
 

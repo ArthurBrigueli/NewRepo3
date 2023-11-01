@@ -1,0 +1,29 @@
+﻿@model pimfo.Models.Relatorio
+
+@{
+    ViewData["Title"] = "Detalhe";
+}
+
+<h1>Detalhe do relatorio</h1>
+
+<div>
+    <h4>Relatorio</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.data_relatorio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.data_relatorio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.valor_total)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.valor_total)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Voltar para menu</a>
+</div>
