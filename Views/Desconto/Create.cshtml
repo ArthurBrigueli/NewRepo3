@@ -48,3 +48,10 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@if (TempData["Erro"] != null)
+{
+    <script>
+        alert("@TempData["Erro"].ToString()");
+    </script>
+}
+

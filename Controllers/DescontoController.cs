@@ -59,12 +59,22 @@ namespace pimfo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,vale_alimentacao,vale_transporte,valor_ferias,imposto_renda,valor_fgts")] Desconto desconto)
         {
-            if (ModelState.IsValid)
+            var quantidadeDesc = await _context.Desconto.ToListAsync();
+
+            if(quantidadeDesc.Count < 1)
             {
-                _context.Add(desconto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(desconto);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
+            else
+            {
+                TempData["Erro"] = "Voce ja tem Descontos cadastrados.";
+            }
+
             return View(desconto);
         }
 
