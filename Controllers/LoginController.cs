@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using pimfo.Models;
 using pimfo.data;
-
+//atual
 namespace pimfo.Controllers
 {
     public class LoginController : Controller
@@ -67,13 +67,7 @@ namespace pimfo.Controllers
                     {
                         return RedirectToAction("Index", "Home");
                     }
-                    else
-                    {
-                        return (View(login));
-                    }
                 }
-                _context.Add(login);
-                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Create));
             }
             return View(login);

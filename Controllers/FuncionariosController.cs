@@ -13,10 +13,12 @@ namespace pimfo.Controllers
     public class FuncionariosController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public FuncionariosController(ApplicationDbContext context)
+        private readonly ApplicationDbContext _contextLogin;    
+        //ATUAL AAAAAAAAAAAA
+        public FuncionariosController(ApplicationDbContext context, ApplicationDbContext contextLogin)
         {
             _context = context;
+            _contextLogin = contextLogin;
         }
 
         // GET: Funcionarios
@@ -56,12 +58,24 @@ namespace pimfo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,nome,rg,cpf,data_nasc,endereco,cargo,salario_bruto")] Funcionarios funcionarios)
-        {
+        public async Task<IActionResult> Create([Bind("id,nome,rg,cpf,data_nasc,endereco,cargo,salario_bruto, rh")] Funcionarios funcionarios)
+        {//aaaaaaaaaaaaaa
             if (ModelState.IsValid)
             {
+                if (funcionarios.rh)
+                {
+                    var login = new Login
+                    {
+                        usuario = funcionarios.nome,
+                        senha = funcionarios.cpf
+                    };
+                    _context.Login.Add(login);
+
+                }
                 _context.Add(funcionarios);
                 await _context.SaveChangesAsync();
+
+                await _contextLogin.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(funcionarios);

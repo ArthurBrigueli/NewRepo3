@@ -23,6 +23,8 @@ namespace pimfo.Models
         public string cargo { get; set; }
         [DisplayName("SALARIO BRUTO")]
         public float salario_bruto { get; set; }
-        
+        [DisplayName("RH")]
+        public bool rh { get; set; }
+
     }
 }
