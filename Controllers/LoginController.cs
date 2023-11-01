@@ -46,7 +46,7 @@ namespace pimfo.Controllers
         }
 
         // GET: Login/Create
-        public IActionResult Create()
+        public IActionResult login()
         {
             return View();
         }
@@ -56,7 +56,7 @@ namespace pimfo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,usuario,senha")] Login login)
+        public async Task<IActionResult> Login([Bind("id,usuario,senha")] Login login)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +68,7 @@ namespace pimfo.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                 }
-                return RedirectToAction(nameof(Create));
+                return RedirectToAction(nameof(Login));
             }
             return View(login);
         }
