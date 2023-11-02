@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using pimfo.Models;
 using pimfo.data;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace pimfo.Controllers
 {
+    [Authorize]
     public class FuncionariosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -25,10 +27,6 @@ namespace pimfo.Controllers
         // GET: Funcionarios
         public async Task<IActionResult> Index()
         {
-            if (!Request.Cookies.ContainsKey("TokenCookie"))
-            {
-                return RedirectToAction("Login", "Login");
-            }
 
             return _context.Funcionarios != null ? 
                           View(await _context.Funcionarios.ToListAsync()) :

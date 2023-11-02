@@ -8,8 +8,17 @@ using Microsoft.EntityFrameworkCore;
 using pimfo.Models;
 using pimfo.data;
 
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+
 namespace pimfo.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,10 +31,7 @@ namespace pimfo.Controllers
         // GET: Home
         public async Task<IActionResult> Index()
         {
-            if (!Request.Cookies.ContainsKey("TokenCookie"))
-            {
-                return RedirectToAction("Login", "Login");
-            }
+            
             return _context.Relatorio != null ? 
                           View(await _context.Relatorio.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Relatorio'  is null.");

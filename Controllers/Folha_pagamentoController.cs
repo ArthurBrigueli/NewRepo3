@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using pimfo.Models;
 using pimfo.data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace pimfo.Controllers
 {
+    [Authorize]
     public class Folha_pagamentoController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -24,10 +26,6 @@ namespace pimfo.Controllers
         // GET: Folha_pagamento
         public async Task<IActionResult> Index()
         {
-            if (!Request.Cookies.ContainsKey("TokenCookie"))
-            {
-                return RedirectToAction("Login", "Login");
-            }
             return _context.Folha_pagamento != null ? 
                           View(await _context.Folha_pagamento.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Folha_pagamento'  is null.");

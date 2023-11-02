@@ -13,6 +13,14 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Caching.Memory;
 using System.Drawing;
 using Microsoft.AspNetCore.Http;
+
+//using agora
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
+
+
 //atual
 namespace pimfo.Controllers
 {
@@ -62,7 +70,7 @@ namespace pimfo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login([Bind("id,usuario,senha")] Login login)
+        public async Task<IActionResult> Login([Bind("id,usuario,senha")] Login login, bool rememberMe)
         {
             if (ModelState.IsValid)
             {
@@ -72,15 +80,18 @@ namespace pimfo.Controllers
                     if(login.usuario == user.usuario && login.senha == user.senha)
                     {
                         //gerar token para cookie
-                        string token = "123";
-                        var cookieOptions = new CookieOptions
+                        var claims = new List<Claim>
                         {
-                            HttpOnly = true, // Isso evita que o cookie seja acessível por JavaScript
-                            Secure = true,   // Apenas em conexões seguras (HTTPS)
-                            SameSite = SameSiteMode.Lax // Configurar a política SameSite apropriada
+                            new Claim(ClaimTypes.Name, user.usuario)
                         };
+                        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        var authProperties = new AuthenticationProperties
+                        {
+                            IsPersistent = rememberMe
+                        };
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
 
-                        Response.Cookies.Append("TokenCookie", token, cookieOptions);
+
                         return RedirectToAction("Index", "Home");
                     }
                 }
