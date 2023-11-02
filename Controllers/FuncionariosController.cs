@@ -163,6 +163,10 @@ namespace pimfo.Controllers
             if (funcionarios != null)
             {
                 _context.Funcionarios.Remove(funcionarios);
+                //Deletar usuario
+                var login = await _contextLogin.Login.FindAsync(id);
+                _contextLogin.Login.Remove(login);
+
             }
             
             await _context.SaveChangesAsync();
