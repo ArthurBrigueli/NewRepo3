@@ -22,7 +22,11 @@ namespace pimfo.Controllers
         // GET: Home
         public async Task<IActionResult> Index()
         {
-              return _context.Relatorio != null ? 
+            if (!Request.Cookies.ContainsKey("TokenCookie"))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            return _context.Relatorio != null ? 
                           View(await _context.Relatorio.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Relatorio'  is null.");
         }

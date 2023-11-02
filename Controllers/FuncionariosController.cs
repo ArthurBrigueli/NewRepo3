@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using pimfo.Models;
 using pimfo.data;
+using Microsoft.AspNetCore.Http;
 
 namespace pimfo.Controllers
 {
@@ -24,7 +25,12 @@ namespace pimfo.Controllers
         // GET: Funcionarios
         public async Task<IActionResult> Index()
         {
-              return _context.Funcionarios != null ? 
+            if (!Request.Cookies.ContainsKey("TokenCookie"))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
+            return _context.Funcionarios != null ? 
                           View(await _context.Funcionarios.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Funcionarios'  is null.");
         }

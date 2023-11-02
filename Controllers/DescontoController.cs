@@ -23,7 +23,11 @@ namespace pimfo.Controllers
         // GET: Desconto
         public async Task<IActionResult> Index()
         {
-              return _context.Desconto != null ? 
+            if (!Request.Cookies.ContainsKey("TokenCookie"))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            return _context.Desconto != null ? 
                           View(await _context.Desconto.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Desconto'  is null.");
         }

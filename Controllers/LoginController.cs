@@ -7,6 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using pimfo.Models;
 using pimfo.data;
+using Microsoft.AspNetCore.Authentication ;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Caching.Memory;
+using System.Drawing;
+using Microsoft.AspNetCore.Http;
 //atual
 namespace pimfo.Controllers
 {
@@ -65,6 +71,16 @@ namespace pimfo.Controllers
                 {
                     if(login.usuario == user.usuario && login.senha == user.senha)
                     {
+                        //gerar token para cookie
+                        string token = "123";
+                        var cookieOptions = new CookieOptions
+                        {
+                            HttpOnly = true, // Isso evita que o cookie seja acessível por JavaScript
+                            Secure = true,   // Apenas em conexões seguras (HTTPS)
+                            SameSite = SameSiteMode.Lax // Configurar a política SameSite apropriada
+                        };
+
+                        Response.Cookies.Append("TokenCookie", token, cookieOptions);
                         return RedirectToAction("Index", "Home");
                     }
                 }

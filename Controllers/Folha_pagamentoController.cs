@@ -24,7 +24,11 @@ namespace pimfo.Controllers
         // GET: Folha_pagamento
         public async Task<IActionResult> Index()
         {
-              return _context.Folha_pagamento != null ? 
+            if (!Request.Cookies.ContainsKey("TokenCookie"))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            return _context.Folha_pagamento != null ? 
                           View(await _context.Folha_pagamento.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Folha_pagamento'  is null.");
         }
