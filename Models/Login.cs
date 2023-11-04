@@ -15,5 +15,8 @@ namespace pimfo.Models
 
         [DisplayName("Senha")]
         public string senha { get; set; }
+
+        [DisplayName("rh")]
+        public bool rh { get; set; }
     }
 }

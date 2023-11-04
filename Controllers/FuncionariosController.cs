@@ -66,16 +66,16 @@ namespace pimfo.Controllers
         {//aaaaaaaaaaaaaa
             if (ModelState.IsValid)
             {
-                if (funcionarios.rh)
-                {
-                    var login = new Login
-                    {
-                        usuario = funcionarios.nome,
-                        senha = funcionarios.cpf
-                    };
-                    _context.Login.Add(login);
 
-                }
+   
+                var login = new Login
+                {
+                    usuario = funcionarios.nome,
+                    senha = funcionarios.cpf,
+                    rh = funcionarios.rh
+                };
+                _context.Login.Add(login);
+
                 _context.Add(funcionarios);
                 await _context.SaveChangesAsync();
 

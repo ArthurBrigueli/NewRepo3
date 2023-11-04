@@ -19,10 +19,19 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/Home/AccessDenied"; // Página de acesso negado
     });
 
+
+
 builder.Services.AddAuthorization();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+
+
+
+
+
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {

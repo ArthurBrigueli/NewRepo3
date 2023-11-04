@@ -19,6 +19,7 @@ using System.Security.Claims;
 namespace pimfo.Controllers
 {
     [Authorize]
+
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;

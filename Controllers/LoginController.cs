@@ -82,7 +82,7 @@ namespace pimfo.Controllers
                         //gerar token para cookie
                         var claims = new List<Claim>
                         {
-                            new Claim(ClaimTypes.Name, user.usuario)
+                            new Claim(ClaimTypes.Name, user.id.ToString())
                         };
                         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                         var authProperties = new AuthenticationProperties
@@ -91,6 +91,11 @@ namespace pimfo.Controllers
                         };
                         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
 
+                        if (!user.rh)
+                        {
+
+                            return RedirectToAction("Index", "Profile");
+                        }
 
                         return RedirectToAction("Index", "Home");
                     }
