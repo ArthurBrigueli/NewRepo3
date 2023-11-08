@@ -188,6 +188,8 @@ namespace pimfo.Controllers
             PdfWriter writer = PdfWriter.GetInstance(doc, ms);
             doc.Open();
 
+            doc.Add(new Paragraph($"Holerite NodeService"));
+            doc.Add(new Paragraph($"----------------------------------"));
             doc.Add(new Paragraph($"Nome: {folha_pagamento.nome_func}"));
             doc.Add(new Paragraph($"Salario Base: {folha_pagamento.salario_base}"));
             doc.Add(new Paragraph($"Cargo: {folha_pagamento.cargo}"));
