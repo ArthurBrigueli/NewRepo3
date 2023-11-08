@@ -1,0 +1,25 @@
+﻿body {
+}
+
+.container-fluid {
+    background-color: #3B314B;
+}
+
+
+
+.body_layout {
+    background-color: #332A42;
+    color: white;
+}
+
+.table {
+    color: white;
+}
+
+    .table a {
+        background-color: white;
+        border-radius: 20px;
+        text-decoration: none;
+        color: black;
+        padding: 2px 7px;
+    }
