@@ -9,6 +9,12 @@ using pimfo.Models;
 using pimfo.data;
 using Microsoft.AspNetCore.Authorization;
 
+
+using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+
+
 namespace pimfo.Controllers
 {
     [Authorize]
@@ -171,6 +177,33 @@ namespace pimfo.Controllers
 
             TempData["Message"] = "Salários reduzidos com sucesso!";
             return RedirectToAction("Index"); // Redirecionar para a página principal ou outra página desejada.
+        }
+
+        public async Task<IActionResult> Download(int id)
+        {
+            //Pegar valores
+            var folha_pagamento = await _context.Folha_pagamento
+                .FirstOrDefaultAsync(m => m.id_folha == id);
+
+
+            var SalarioTotal = folha_pagamento.vale_alimentacao + folha_pagamento.valor_ferias + folha_pagamento.imposto_renda + folha_pagamento.vale_transporte + folha_pagamento.valor_fgts;
+
+
+            //Gerar PDF
+            Document doc = new Document();
+            MemoryStream ms = new MemoryStream();
+            PdfWriter writer = PdfWriter.GetInstance(doc, ms);
+            doc.Open();
+
+            doc.Add(new Paragraph($"Nome: {folha_pagamento.nome_func}"));
+            doc.Add(new Paragraph($"Salario Base: {folha_pagamento.salario_base}"));
+            doc.Add(new Paragraph($"Cargo: {folha_pagamento.cargo}"));
+            doc.Add(new Paragraph($"Data: {folha_pagamento.data}"));
+            doc.Add(new Paragraph($"Total de descontos: {SalarioTotal}"));
+            doc.Add(new Paragraph($"Salario Liquido: {folha_pagamento.salario_liquido}"));
+            doc.Close();
+            Response.Headers.Add("content-disposition", "inline; filename=exemplo.pdf");
+            return File(ms.ToArray(), "application/pdf");
         }
 
         // GET: Folha_pagamento/Delete/5
