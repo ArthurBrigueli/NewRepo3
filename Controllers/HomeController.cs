@@ -16,6 +16,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
+using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+
 namespace pimfo.Controllers
 {
     [Authorize]
@@ -164,6 +168,36 @@ namespace pimfo.Controllers
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Download(int id)
+        {
+            //Pegar valores
+            var relatorio = await _context.Relatorio
+                .FirstOrDefaultAsync(m => m.id_relatorio == id);
+
+
+            
+
+
+            //Gerar PDF
+            Document doc = new Document();
+            MemoryStream ms = new MemoryStream();
+            PdfWriter writer = PdfWriter.GetInstance(doc, ms);
+            doc.Open();
+
+            DateTime date = DateTime.Now;
+
+
+            doc.Add(new Paragraph($"Holerite NodeService"));
+            doc.Add(new Paragraph($"----------------------------------"));
+            doc.Add(new Paragraph($"ID: {relatorio.id_relatorio}"));
+            doc.Add(new Paragraph($"Data relatorio: {relatorio.data_relatorio}"));
+            doc.Add(new Paragraph($"Valor gasto: {relatorio.valor_total}"));
+
+            doc.Close();
+            Response.Headers.Add("content-disposition", "inline; filename=exemplo.pdf");
+            return File(ms.ToArray(), "application/pdf");
         }
 
         private bool RelatorioExists(int id)

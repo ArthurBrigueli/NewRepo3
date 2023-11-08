@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 
 namespace pimfo.Controllers
@@ -47,6 +48,7 @@ namespace pimfo.Controllers
 
             var folha_pagamento = await _context.Folha_pagamento
                 .FirstOrDefaultAsync(m => m.id_folha == id);
+
             if (folha_pagamento == null)
             {
                 return NotFound();
@@ -157,7 +159,9 @@ namespace pimfo.Controllers
                         valor_ferias = desconto.valor_ferias,
                         valor_fgts = desconto.valor_fgts,
                         imposto_renda = desconto.imposto_renda,
-                        salario_liquido = salaatt
+                        salario_liquido = salaatt,
+                        
+                     
                    
                     };
                     _context.Add(registroFolha);
@@ -229,6 +233,15 @@ namespace pimfo.Controllers
             return View(folha_pagamento);
         }
 
+
+        public IActionResult Adiantamento()
+        {
+            return View();
+        }
+
+
+        
+
         // POST: Folha_pagamento/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -247,7 +260,6 @@ namespace pimfo.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
         private bool Folha_pagamentoExists(int id)
         {
           return (_context.Folha_pagamento?.Any(e => e.id_folha == id)).GetValueOrDefault();

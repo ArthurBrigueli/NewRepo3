@@ -34,7 +34,8 @@ namespace pimfo.Models
 
         public float imposto_renda { get; set; }
         [DisplayName("FGTS")]
-
         public float valor_fgts { get; set; }
+        [DisplayName("Valor adiantado")]
+        public float valor_adiantado { get; set; }
     }
 }
