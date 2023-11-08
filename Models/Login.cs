@@ -9,6 +9,8 @@ namespace pimfo.Models
         [Key]
         [DisplayName("ID")]
         public int id { get; set; }
+        [DisplayName("ID funcionario")]
+        public int id_func { get; set; }
 
         [DisplayName("Usuario")]
         public string usuario { get; set; }

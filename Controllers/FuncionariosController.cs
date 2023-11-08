@@ -70,6 +70,7 @@ namespace pimfo.Controllers
    
                 var login = new Login
                 {
+                    id_func = funcionarios.id,
                     usuario = funcionarios.nome,
                     senha = funcionarios.cpf,
                     rh = funcionarios.rh
