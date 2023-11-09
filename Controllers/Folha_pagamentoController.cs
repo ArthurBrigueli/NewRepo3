@@ -211,7 +211,7 @@ namespace pimfo.Controllers
             doc.Add(new Paragraph($"Total de descontos: {SalarioTotal}"));
             doc.Add(new Paragraph($"Salario Liquido: {folha_pagamento.salario_liquido}"));
             doc.Close();
-            Response.Headers.Add("content-disposition", "inline; filename=exemplo.pdf");
+            Response.Headers.Add("content-disposition", $"inline; filename={folha_pagamento.data}.pdf");
             return File(ms.ToArray(), "application/pdf");
         }
 
