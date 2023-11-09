@@ -12,6 +12,16 @@
     color: white;
 }
 
+
+.opcoes_menu a{
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    padding: 3px 10px;
+    text-decoratio: none;
+   
+}
+
 .table {
     color: white;
 }
@@ -23,3 +33,4 @@
         color: black;
         padding: 2px 7px;
     }
+
