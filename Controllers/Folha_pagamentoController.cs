@@ -184,7 +184,7 @@ namespace pimfo.Controllers
                             valor_ferias = desconto.valor_ferias,
                             valor_fgts = desconto.valor_fgts,
                             imposto_renda = desconto.imposto_renda,
-                            salario_liquido = salaatt,
+                            salario_liquido = salaatt
                         };
                         _context.Add(registroFolha);
                         await _context.SaveChangesAsync();

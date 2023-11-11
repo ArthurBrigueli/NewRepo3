@@ -35,7 +35,7 @@ namespace pimfo.Controllers
             var folhaPagamento = await _context.Folha_pagamento
             .Where(fp => fp.id_func == int.Parse(id))
             .ToListAsync();
-
+            
                 if (folhaPagamento != null)
                 {
                     return View(folhaPagamento);
