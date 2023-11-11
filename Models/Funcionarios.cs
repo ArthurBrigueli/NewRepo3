@@ -25,6 +25,7 @@ namespace pimfo.Models
         public float salario_bruto { get; set; }
         [DisplayName("RH")]
         public bool rh { get; set; }
-
+        [DisplayName("Adiantamento")]
+        public float? valor_adiantamento { get; set; } 
     }
 }

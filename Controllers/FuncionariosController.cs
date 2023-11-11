@@ -178,6 +178,24 @@ namespace pimfo.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult Adiantamento()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> Gerar_Adiantamento(string cpf, float valor_adiantamento)
+        {
+            var funcionario = _context.Funcionarios.FirstOrDefault(e=> e.cpf == cpf);
+            if (funcionario != null)
+            {
+                funcionario.valor_adiantamento = valor_adiantamento;
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Funcionarios");
+            }
+
+            return RedirectToAction("Index", "Funcionarios");
+        }
+
         private bool FuncionariosExists(int id)
         {
           return (_context.Funcionarios?.Any(e => e.id == id)).GetValueOrDefault();

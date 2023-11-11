@@ -147,25 +147,51 @@ namespace pimfo.Controllers
                     var descTotal = desconto.vale_alimentacao + desconto.valor_ferias + desconto.imposto_renda + desconto.vale_transporte + desconto.valor_fgts;
                     var salaatt = funcionario.salario_bruto - descTotal;
                     salGeral += funcionario.salario_bruto;
-                    var registroFolha = new Folha_pagamento
+
+                    if (funcionario.valor_adiantamento > 0)
                     {
-                        id_func = funcionario.id,//asas
-                        nome_func = funcionario.nome,
-                        salario_base = funcionario.salario_bruto,
-                        cargo = funcionario.cargo,
-                        data = currentTime.ToString("dd/MM/yyyy HH:mm:ss"),
-                        vale_alimentacao = desconto.vale_alimentacao,
-                        vale_transporte = desconto.vale_transporte,
-                        valor_ferias = desconto.valor_ferias,
-                        valor_fgts = desconto.valor_fgts,
-                        imposto_renda = desconto.imposto_renda,
-                        salario_liquido = salaatt,
-                        
-                     
+                            
+                        var registroFolhaAdiantamento = new Folha_pagamento
+                        {
+                            id_func = funcionario.id,//asas
+                            nome_func = funcionario.nome,
+                            salario_base = funcionario.salario_bruto,
+                            cargo = funcionario.cargo,
+                            data = currentTime.ToString("dd/MM/yyyy HH:mm:ss"),
+                            vale_alimentacao = desconto.vale_alimentacao,
+                            vale_transporte = desconto.vale_transporte,
+                            valor_ferias = desconto.valor_ferias,
+                            valor_fgts = desconto.valor_fgts,
+                            valor_adiantado = funcionario.valor_adiantamento,
+                            imposto_renda = desconto.imposto_renda,
+                            salario_liquido = (float)(salaatt - funcionario.valor_adiantamento),
+                        };
+                        funcionario.valor_adiantamento = 0;
+                        _context.Add(registroFolhaAdiantamento);
+                        await _context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        var registroFolha = new Folha_pagamento
+                        {
+                            id_func = funcionario.id,//asas
+                            nome_func = funcionario.nome,
+                            salario_base = funcionario.salario_bruto,
+                            cargo = funcionario.cargo,
+                            data = currentTime.ToString("dd/MM/yyyy HH:mm:ss"),
+                            vale_alimentacao = desconto.vale_alimentacao,
+                            vale_transporte = desconto.vale_transporte,
+                            valor_ferias = desconto.valor_ferias,
+                            valor_fgts = desconto.valor_fgts,
+                            imposto_renda = desconto.imposto_renda,
+                            salario_liquido = salaatt,
+                        };
+                        _context.Add(registroFolha);
+                        await _context.SaveChangesAsync();
+                    }
+
                    
-                    };
-                    _context.Add(registroFolha);
-                    await _context.SaveChangesAsync();
+                    
                 }
             }
             var relatorio = new Relatorio
