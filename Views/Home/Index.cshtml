@@ -43,3 +43,48 @@
 }
     </tbody>
 </table>
+
+
+
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+    const ctx = document.getElementById('myChart');
+
+    var valores = [];
+    var b = []
+
+    @foreach (var item in Model)
+    {
+        <text>valores.push(@item.valor_total); </text>
+        <text>b.push(new Date("@item.data_relatorio").toLocaleDateString('en-US')); </text>
+    }
+
+
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: b,
+            datasets: [{
+                label: 'Valor Total',
+                data: valores,
+                borderWidth: 1,
+                backgroundColor: 'rgba(255, 157, 0, 1)',
+                derColor: 'rgba(237, 2, 229, 1)'
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

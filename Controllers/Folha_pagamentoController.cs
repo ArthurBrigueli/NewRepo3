@@ -194,9 +194,10 @@ namespace pimfo.Controllers
                     
                 }
             }
+            
             var relatorio = new Relatorio
             {
-                data_relatorio = currentTime.ToString("dd/MM/yyyy HH:mm:ss"),
+                data_relatorio = currentTime.ToString("dd/MM/yyyy").ToString(),
                 valor_total = salGeral
             };
 
