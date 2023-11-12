@@ -193,11 +193,12 @@ namespace pimfo.Controllers
             doc.Add(new Paragraph($"Holerite NodeService"));
             doc.Add(new Paragraph($"----------------------------------"));
             doc.Add(new Paragraph($"Nome: {folha_pagamento.nome_func}"));
-            doc.Add(new Paragraph($"Salario Base: {folha_pagamento.salario_base}"));
+            doc.Add(new Paragraph($"Salario Base: R${folha_pagamento.salario_base}"));
             doc.Add(new Paragraph($"Cargo: {folha_pagamento.cargo}"));
             doc.Add(new Paragraph($"Data: {folha_pagamento.data}"));
-            doc.Add(new Paragraph($"Total de descontos: {SalarioTotal}"));
-            doc.Add(new Paragraph($"Salario Liquido: {folha_pagamento.salario_liquido}"));
+            doc.Add(new Paragraph($"Total de descontos: R${SalarioTotal}"));
+            doc.Add(new Paragraph($"Valor antecipado: R${folha_pagamento.valor_adiantado}"));
+            doc.Add(new Paragraph($"Salario Liquido: R${folha_pagamento.salario_liquido}"));
             doc.Close();
             Response.Headers.Add("content-disposition", "inline; filename=exemplo.pdf");
             return File(ms.ToArray(), "application/pdf");
