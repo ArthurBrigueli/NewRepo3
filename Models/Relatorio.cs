@@ -13,5 +13,7 @@ namespace pimfo.Models
         public string data_relatorio { get; set; }
         [DisplayName("Valor Total")]
         public double valor_total { get; set; }
+        [DisplayName("Quantidade")]
+        public double quantidade_func { get; set; }
     }
 }

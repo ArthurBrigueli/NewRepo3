@@ -32,7 +32,7 @@ namespace pimfo.Controllers
         {
             string id = User.FindFirst(ClaimTypes.Name)?.Value;
 
-            var folhaPagamento = await _context.Folha_pagamento
+            var folhaPagamento = await _context.Folha_pagamento.OrderByDescending(item=>item)
             .Where(fp => fp.id_func == int.Parse(id))
             .ToListAsync();
             

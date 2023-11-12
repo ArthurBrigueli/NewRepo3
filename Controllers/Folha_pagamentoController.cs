@@ -137,10 +137,11 @@ namespace pimfo.Controllers
             var descontos = _context.Desconto.ToList();
             DateTime currentTime = DateTime.Now;
             var salGeral = 0.0;
-
+            var quantidadeFunc = 0;
 
             foreach (var funcionario in funcionarios)
             {
+                quantidadeFunc += 1;
                 foreach(var desconto in descontos)
                 {
 
@@ -194,11 +195,12 @@ namespace pimfo.Controllers
                     
                 }
             }
-            
+
             var relatorio = new Relatorio
             {
                 data_relatorio = currentTime.ToString("dd/MM/yyyy").ToString(),
-                valor_total = salGeral
+                valor_total = salGeral,
+                quantidade_func = quantidadeFunc
             };
 
             _contextRelatorio.Add(relatorio);
