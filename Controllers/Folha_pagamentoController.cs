@@ -34,7 +34,7 @@ namespace pimfo.Controllers
         public async Task<IActionResult> Index()
         {
             return _context.Folha_pagamento != null ? 
-                          View(await _context.Folha_pagamento.ToListAsync()) :
+                          View(await _context.Folha_pagamento.OrderByDescending(item=>item).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Folha_pagamento'  is null.");
         }
 

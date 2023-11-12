@@ -29,7 +29,7 @@ namespace pimfo.Controllers
         {
 
             return _context.Funcionarios != null ? 
-                          View(await _context.Funcionarios.ToListAsync()) :
+                          View(await _context.Funcionarios.OrderByDescending(item=>item).ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Funcionarios'  is null.");
         }
 
