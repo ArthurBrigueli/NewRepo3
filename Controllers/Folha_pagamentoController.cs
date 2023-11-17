@@ -145,8 +145,33 @@ namespace pimfo.Controllers
                 foreach(var desconto in descontos)
                 {
 
-                    var descTotal = desconto.vale_alimentacao + desconto.valor_ferias + desconto.imposto_renda + desconto.vale_transporte + desconto.valor_fgts;
-                    var salaatt = funcionario.salario_bruto - descTotal;
+                    var porcentagemImposto = 0.0;
+                    var salImposto = 0.0;
+
+                    var descTotal = desconto.vale_alimentacao + desconto.valor_ferias + desconto.vale_transporte + desconto.valor_fgts;
+              
+
+                    if(funcionario.salario_bruto >= 1903 && funcionario.salario_bruto <= 2826)
+                    {
+                        porcentagemImposto = 10;
+                        salImposto = funcionario.salario_bruto * 0.1;
+                    }else if(funcionario.salario_bruto >= 2827 && funcionario.salario_bruto <= 3751)
+                    {
+                        porcentagemImposto = 15;
+                        salImposto = funcionario.salario_bruto * 0.15;
+                    }
+                    else if (funcionario.salario_bruto >= 3752 && funcionario.salario_bruto <= 4664)
+                    {
+                        porcentagemImposto = 22;
+                        salImposto = funcionario.salario_bruto * 0.22;
+                    }
+                    else if (funcionario.salario_bruto >= 4665)
+                    {
+                        porcentagemImposto = 27;
+                        salImposto = funcionario.salario_bruto * 0.27;
+                    }
+
+                    var salaatt = (funcionario.salario_bruto - descTotal) - salImposto;
                     salGeral += funcionario.salario_bruto;
 
                     if (funcionario.valor_adiantamento > 0)
@@ -164,7 +189,7 @@ namespace pimfo.Controllers
                             valor_ferias = desconto.valor_ferias,
                             valor_fgts = desconto.valor_fgts,
                             valor_adiantado = funcionario.valor_adiantamento,
-                            imposto_renda = desconto.imposto_renda,
+                            imposto_renda = (float)porcentagemImposto,
                             salario_liquido = (float)(salaatt - funcionario.valor_adiantamento),
                         };
                         funcionario.valor_adiantamento = 0;
@@ -177,15 +202,15 @@ namespace pimfo.Controllers
                         {
                             id_func = funcionario.id,//asas
                             nome_func = funcionario.nome,
-                            salario_base = funcionario.salario_bruto,
+                            salario_base = (float)funcionario.salario_bruto,
                             cargo = funcionario.cargo,
                             data = currentTime.ToString("dd/MM/yyyy HH:mm:ss"),
                             vale_alimentacao = desconto.vale_alimentacao,
                             vale_transporte = desconto.vale_transporte,
                             valor_ferias = desconto.valor_ferias,
                             valor_fgts = desconto.valor_fgts,
-                            imposto_renda = desconto.imposto_renda,
-                            salario_liquido = salaatt
+                            imposto_renda = (float)porcentagemImposto,
+                            salario_liquido = (float)salaatt
                         };
                         _context.Add(registroFolha);
                         await _context.SaveChangesAsync();
